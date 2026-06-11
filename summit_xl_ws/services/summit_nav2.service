@@ -1,0 +1,22 @@
+[Unit]
+Description=Summit XL Nav2 bringup
+After=summit_teleop.service sick_scan.service
+Requires=summit_teleop.service
+Wants=sick_scan.service
+
+[Service]
+Type=simple
+User=ros2
+Environment=HOME=/home/ros2
+Environment=ROS_DOMAIN_ID=0
+Environment=ROS_LOCALHOST_ONLY=0
+Environment=RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+Environment=FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+WorkingDirectory=/home/ros2/ros2_ws
+ExecStartPre=/bin/sleep 8
+ExecStart=/bin/bash -lc 'source /opt/ros/humble/setup.bash && source /home/ros2/ros2_ws/install/setup.bash && ros2 launch nav2_bringup navigation_launch.py use_sim_time:=false params_file:=/home/ros2/ros2_ws/src/summit_xl_base/config/nav2_no_obstacles.yaml'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

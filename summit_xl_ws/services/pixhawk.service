@@ -1,0 +1,19 @@
+[Unit]
+Description=Telemetria Automatica TFG
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ros2
+Environment=ROS_DOMAIN_ID=0
+Environment=ROS_LOCALHOST_ONLY=0
+Environment=RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+Environment=FASTDDS_BUILTIN_TRANSPORTS=UDPv4
+WorkingDirectory=/home/ros2
+ExecStart=/home/ros2/arranqueauto_pixhawk.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
