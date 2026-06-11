@@ -22,7 +22,7 @@ class SummitBase(Node):
         )
 
         # Parámetros robot
-        self.WHEEL_SEPARATION = 0.445
+        self.WHEEL_SEPARATION = 1
         self.METERS_PER_COUNT = 0.00001931
 
         # Odometría
